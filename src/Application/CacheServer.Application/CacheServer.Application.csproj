@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ApplicationIcon />
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Contract\CacheServer.Contract\CacheServer.Contract.csproj" />
+    <ProjectReference Include="..\..\Infra\CacheServer.Infra\CacheServer.Infra.csproj" />
+  </ItemGroup>
+
+</Project>
