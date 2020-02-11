@@ -1,6 +1,7 @@
 ﻿using CacheServer.Application.Interfaces;
 using CacheServer.Contract.Models;
 using CacheServer.Infra.Data;
+using System.Threading.Tasks;
 
 namespace CacheServer.Application.Services
 {
@@ -13,24 +14,29 @@ namespace CacheServer.Application.Services
             _provider = provider;
         }
 
-        public CacheItem Add(CacheItem obj)
+        public async Task<CacheItem> AddAsync(CacheItem obj)
         {
-            return _provider.Add(obj);
+            return await _provider.AddAsync(obj);
         }
 
-        public CacheItem Get(object key)
+        public async Task<CacheItem> GetAsync(object key)
         {
-            return _provider.Get(key);
+            return await _provider.GetAsync(key);
         }
 
-        public void Remove(CacheItem obj)
+        public async Task RemoveAsync(object key)
         {
-            _provider.Remove(obj);
+            await _provider.RemoveAsync(key);
         }
 
-        public CacheItem Update(CacheItem obj)
+        public async Task<CacheItem> UpdateAsync(CacheItem obj)
         {
-            return _provider.Update(obj);
+            return await _provider.UpdateAsyn(obj);
+        }
+
+        public async Task<int> CountObjects()
+        {
+            return await _provider.CountObjects();
         }
     }
 }

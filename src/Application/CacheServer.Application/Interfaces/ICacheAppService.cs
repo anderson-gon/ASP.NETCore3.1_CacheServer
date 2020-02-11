@@ -1,14 +1,16 @@
 ﻿
 using CacheServer.Contract.Models;
+using System.Threading.Tasks;
 
 namespace CacheServer.Application.Interfaces
 {
     public interface ICacheAppService
     {
-        CacheItem Get(object key);
-        CacheItem Add(CacheItem obj);
-        void Remove(CacheItem obj);
+        Task<CacheItem> GetAsync(object key);
+        Task<CacheItem> AddAsync(CacheItem obj);
+        Task RemoveAsync(object key);
 
-        CacheItem Update(CacheItem obj);
+        Task<CacheItem> UpdateAsync(CacheItem obj);
+        Task<int> CountObjects();
     }
 }

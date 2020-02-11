@@ -15,11 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-Infra", "02-Infra", "{F5
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CacheServer.Infra", "Infra\CacheServer.Infra\CacheServer.Infra.csproj", "{A9A437C4-C15D-4ABB-BEAB-B24136FBCF53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheServer.IoC", "Infra\CacheServer.IoC\CacheServer.IoC.csproj", "{69DCF27E-BA83-4E17-9251-36559F9CC1C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CacheServer.IoC", "Infra\CacheServer.IoC\CacheServer.IoC.csproj", "{69DCF27E-BA83-4E17-9251-36559F9CC1C2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-Application", "03-Application", "{1B0369B6-2F58-4047-999D-04878C31DBFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheServer.Application", "Application\CacheServer.Application\CacheServer.Application.csproj", "{8A366B3F-3836-467B-B7E8-BE2A2923BD8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CacheServer.Application", "Application\CacheServer.Application\CacheServer.Application.csproj", "{8A366B3F-3836-467B-B7E8-BE2A2923BD8E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

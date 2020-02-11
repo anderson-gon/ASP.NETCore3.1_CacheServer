@@ -1,12 +1,13 @@
 ﻿using CacheServer.Application.Interfaces;
 using CacheServer.Contract.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Threading.Tasks;
 
 namespace CacheServer.API.Controllers
-{
+{    
     [ApiController]
     [Route("[controller]")]
     public class CacheController : ApiController
@@ -23,13 +24,34 @@ namespace CacheServer.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get([FromQuery] string key)
+        [Route("CountObjects")]
+        public async Task<IActionResult> CountObjects()
+        {
+            try
+            {
+                _logger.LogInformation($"{typeof(CacheController)} - Getting objects on cache");
+
+                int countObjects = await _cacheAppService.CountObjects();
+
+                return Response(countObjects);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"A error ocurr. Message: {ex.Message}");
+                return Response(ex, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get([FromQuery] string key)
         {
             try
             {
                 _logger.LogInformation($"{typeof(CacheController)} - Getting obj by key : {key}");
 
-                return Response(_cacheAppService.Get(key));
+                var cacheItem = await _cacheAppService.GetAsync(key);
+
+                return Response(cacheItem);
             }
             catch (Exception ex)
             {
@@ -39,13 +61,15 @@ namespace CacheServer.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] CacheItem item)
+        public async Task<IActionResult> Post([FromBody] CacheItem item)
         {
             try
             {
                 _logger.LogInformation($"{typeof(CacheController)} - Recording obj by key : {item.Key}");
 
-                return Response(_cacheAppService.Add(item));
+                var cacheItem = await _cacheAppService.AddAsync(item);
+
+                return Response(cacheItem);
             }
             catch (Exception ex)
             {
@@ -55,13 +79,15 @@ namespace CacheServer.API.Controllers
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] CacheItem item)
+        public async Task<IActionResult> Put([FromBody] CacheItem item)
         {
             try
             {
                 _logger.LogInformation($"{typeof(CacheController)} - Updating obj with key : {item.Key}");
 
-                return Response(_cacheAppService.Update(item));
+                var cacheItem = await _cacheAppService.UpdateAsync(item);
+
+                return Response(cacheItem);
             }
             catch (Exception ex)
             {
@@ -71,21 +97,18 @@ namespace CacheServer.API.Controllers
         }
 
         [HttpDelete]
-        public IActionResult Delete([FromQuery] string key)
+        public async Task<IActionResult> Delete([FromQuery] string key)
         {
             try
             {
                 _logger.LogInformation($"{typeof(CacheController)} - Deleting obj with key : {key}");
 
-                var item = _cacheAppService.Get(key);
+                
 
-                if (item == null)
-                    throw new InvalidOperationException($"Object with key: {key} not found on the cache!");
-
-                _cacheAppService.Remove(item);
+                await _cacheAppService.RemoveAsync(key);
 
 
-                return Response($"Item with key {item.Key} deleted from cache");
+                return Response($"Item with key {key} deleted from cache");
             }
             catch (Exception ex)
             {
