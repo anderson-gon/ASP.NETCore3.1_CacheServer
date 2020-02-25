@@ -21,6 +21,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-Application", "03-Applic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CacheServer.Application", "Application\CacheServer.Application\CacheServer.Application.csproj", "{8A366B3F-3836-467B-B7E8-BE2A2923BD8E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05-Benchmark", "05-Benchmark", "{01FC764A-2AC3-4ACD-AF4F-25D2A503F194}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheServer.Benchmark", "Benchmark\CacheServer.Benchmark\CacheServer.Benchmark.csproj", "{D9D95634-A31C-42F4-9596-8A2AE4857ABB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +51,10 @@ Global
 		{8A366B3F-3836-467B-B7E8-BE2A2923BD8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A366B3F-3836-467B-B7E8-BE2A2923BD8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A366B3F-3836-467B-B7E8-BE2A2923BD8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9D95634-A31C-42F4-9596-8A2AE4857ABB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9D95634-A31C-42F4-9596-8A2AE4857ABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9D95634-A31C-42F4-9596-8A2AE4857ABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9D95634-A31C-42F4-9596-8A2AE4857ABB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +65,7 @@ Global
 		{A9A437C4-C15D-4ABB-BEAB-B24136FBCF53} = {F5D3E309-6D81-4091-9817-CBAF1386398C}
 		{69DCF27E-BA83-4E17-9251-36559F9CC1C2} = {F5D3E309-6D81-4091-9817-CBAF1386398C}
 		{8A366B3F-3836-467B-B7E8-BE2A2923BD8E} = {1B0369B6-2F58-4047-999D-04878C31DBFB}
+		{D9D95634-A31C-42F4-9596-8A2AE4857ABB} = {01FC764A-2AC3-4ACD-AF4F-25D2A503F194}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2AF2D799-7155-447B-94CC-079665632ED7}

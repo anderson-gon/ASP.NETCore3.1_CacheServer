@@ -1,13 +1,12 @@
 ﻿using CacheServer.Application.Interfaces;
 using CacheServer.Contract.Models;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
 namespace CacheServer.API.Controllers
-{    
+{
     [ApiController]
     [Route("[controller]")]
     public class CacheController : ApiController
@@ -31,7 +30,9 @@ namespace CacheServer.API.Controllers
             {
                 _logger.LogInformation($"{typeof(CacheController)} - Getting objects on cache");
 
-                int countObjects = await _cacheAppService.CountObjects();
+                int countObjects = await _cacheAppService
+                                            .CountObjects()
+                                            .ConfigureAwait(false);
 
                 return Response(countObjects);
             }
@@ -49,7 +50,9 @@ namespace CacheServer.API.Controllers
             {
                 _logger.LogInformation($"{typeof(CacheController)} - Getting obj by key : {key}");
 
-                var cacheItem = await _cacheAppService.GetAsync(key);
+                var cacheItem = await _cacheAppService
+                                        .GetAsync(key)
+                                        .ConfigureAwait(false);
 
                 return Response(cacheItem);
             }
@@ -67,7 +70,9 @@ namespace CacheServer.API.Controllers
             {
                 _logger.LogInformation($"{typeof(CacheController)} - Recording obj by key : {item.Key}");
 
-                var cacheItem = await _cacheAppService.AddAsync(item);
+                var cacheItem = await _cacheAppService
+                                        .AddAsync(item)
+                                        .ConfigureAwait(false);
 
                 return Response(cacheItem);
             }
@@ -85,7 +90,9 @@ namespace CacheServer.API.Controllers
             {
                 _logger.LogInformation($"{typeof(CacheController)} - Updating obj with key : {item.Key}");
 
-                var cacheItem = await _cacheAppService.UpdateAsync(item);
+                var cacheItem = await _cacheAppService
+                                        .UpdateAsync(item)
+                                        .ConfigureAwait(false);
 
                 return Response(cacheItem);
             }
@@ -105,7 +112,9 @@ namespace CacheServer.API.Controllers
 
                 
 
-                await _cacheAppService.RemoveAsync(key);
+                await _cacheAppService
+                        .RemoveAsync(key)
+                        .ConfigureAwait(false);
 
 
                 return Response($"Item with key {key} deleted from cache");

@@ -6,11 +6,11 @@ namespace CacheServer.Application.Interfaces
 {
     public interface ICacheAppService
     {
-        Task<CacheItem> GetAsync(object key);
-        Task<CacheItem> AddAsync(CacheItem obj);
-        Task RemoveAsync(object key);
+        ValueTask<CacheItem> GetAsync(object key);
+        ValueTask<CacheItem> AddAsync(CacheItem obj);
+        ValueTask RemoveAsync(object key);
 
-        Task<CacheItem> UpdateAsync(CacheItem obj);
-        Task<int> CountObjects();
+        ValueTask<CacheItem> UpdateAsync(CacheItem obj);
+        ValueTask<int> CountObjects();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CacheServer.Application.Interfaces;
+using CacheServer.Contract.Exceptions;
 using CacheServer.Contract.Models;
 using CacheServer.Infra.Data;
 using System.Threading.Tasks;
@@ -14,27 +15,38 @@ namespace CacheServer.Application.Services
             _provider = provider;
         }
 
-        public async Task<CacheItem> AddAsync(CacheItem obj)
+        public async ValueTask<CacheItem> AddAsync(CacheItem obj)
         {
+            if (!obj.IsValidKey())
+                throw new InvalidCacheKeyException("object to cache is invalid key not informed!");
+            var cacheItem = await _provider.GetAsync(obj.Key);
+            if (cacheItem != null)
+                throw new DuplicateCacheKeyException($"object with key {obj.Key} already exists!");
             return await _provider.AddAsync(obj);
         }
 
-        public async Task<CacheItem> GetAsync(object key)
+        public async ValueTask<CacheItem> GetAsync(object key)
         {
-            return await _provider.GetAsync(key);
+            _= key ?? throw new InvalidCacheKeyException("key not informed!");
+            return await _provider.GetAsync(key) ?? throw new CacheKeyNotFoundException($"Item with key {key} not found");
         }
 
-        public async Task RemoveAsync(object key)
+        public async ValueTask RemoveAsync(object key)
         {
+            _ = key ?? throw new InvalidCacheKeyException("key not informed!");
+            _ = await _provider.GetAsync(key) ?? throw new CacheKeyNotFoundException($"Item with key {key} not found");
             await _provider.RemoveAsync(key);
         }
 
-        public async Task<CacheItem> UpdateAsync(CacheItem obj)
+        public async ValueTask<CacheItem> UpdateAsync(CacheItem obj)
         {
+            if (!obj.IsValidKey())
+                throw new InvalidCacheKeyException("object to cache is invalid key not informed!");
+            _ = await _provider.GetAsync(obj.Key) ?? throw new CacheKeyNotFoundException($"Item with key {obj.Key} not found");
             return await _provider.UpdateAsyn(obj);
         }
 
-        public async Task<int> CountObjects()
+        public async ValueTask<int> CountObjects()
         {
             return await _provider.CountObjects();
         }
